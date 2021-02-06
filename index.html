@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-<title>FeatureLayer</title>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <title>Intro to MapView - Create a 2D map | Sample | ArcGIS API for JavaScript 4.18</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
 
-<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css">
-<script src="https://js.arcgis.com/3.35/"></script>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css" />
+    <script src="https://js.arcgis.com/4.18/"></script>
 
-<style>
-html, body, #map {
-  padding: 0;
-  margin: 0;
-  height: 100%;
-  width: 100%;
-}
-</style>
+    <script>
+      require(["esri/Map", "esri/views/MapView"], function(Map, MapView) {
+        var map = new Map({
+          basemap: "topo-vector"
+        });
 
-<script>
-require([
-    "esri/map",
-    "esri/layers/FeatureLayer",
-    "dojo/domReady!"
-  ],
-  function(
-    Map,
-    FeatureLayer
-  ) {
+        var view = new MapView({
+          container: "viewDiv",
+          map: map,
+          zoom: 4,
+          center: [15, 65] // longitude, latitude
+        });
+      });
+    </script>
+  </head>
 
-    var map = new Map("map", {
-      basemap: "hybrid",
-      center: [-82.44109, 35.6122],
-      zoom: 17
-    });
-
-    /****************************************************************
-     * Add feature layer - A FeatureLayer at minimum should point
-     * to a URL to a feature service or point to a feature collection 
-     * object.
-     ***************************************************************/
-
-    // Carbon storage of trees in Warren Wilson College.
-    var featureLayer = new FeatureLayer("https://services.arcgis.com/V6ZHFr6zdgNZuVG0/arcgis/rest/services/Landscape_Trees/FeatureServer/0");
-
-    map.addLayer(featureLayer);
-
-  });
-</script>
-</head>
-
-<body>
-  <div id="map"></div>
-</body>
-
+  <body>
+    <div id="viewDiv"></div>
+  </body>
 </html>
+
